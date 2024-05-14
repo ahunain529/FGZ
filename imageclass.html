@@ -1,0 +1,43 @@
+<!Doctype html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="uft-8">
+    <title>FieldGenie</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <script src="imgclass.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.9.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@2.0.4"></script>
+
+</head>
+
+<body>
+
+    <div class="background-image">
+        <img src="china.jpg">
+    </div>
+
+    <div class="container">
+        <header>
+            <h1 class="logo">FieldGenie</h1>
+            <p class="tagline">Helping farmers grow with AI</p>
+        </header>
+    </div>
+    <input type="file" accept="image/*" onchange="previewImage(event)">
+    
+    <br>
+    <img id="preview" src="" alt="Preview Image">
+    <br>
+    <button onclick="classifyImage()">Classify Image</button>
+
+    <div id="results"></div>
+    <div id="recommendations"></div>
+
+
+
+</body>
+
+</html>

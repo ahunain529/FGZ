@@ -1,0 +1,220 @@
+<!Doctype html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="uft-8">
+    <title>FieldGenie</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <!-- <script src="script.js" defer></script> -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+
+    <div class="background-image">
+        <img src="field.jpg">
+    </div>
+
+    <div class="container">
+        <header>
+            <h1 class="logo">FieldGenie</h1>
+            <p class="tagline">Helping farmers grow with AI</p>
+        </header>
+
+        <section class="section vision">
+            <h2>Our Vision</h2>
+            <p>FieldGenie is a chatbot designed to empower farmers by providing them with instant access to agricultural
+                information and support. We strive to bridge the knowledge gap and equip farmers with the tools they
+                need to make informed decisions, optimize their yields, and ensure a sustainable future for agriculture.
+            </p>
+        </section>
+
+        <section class="section aims hidden">
+            <h2>Our Aims</h2>
+            <ul>
+                <li>Provide easy-to-understand and reliable agricultural information.</li>
+                <li>Help farmers identify and solve problems related to crops, pests, and diseases.</li>
+                <li>Offer personalized recommendations based on local conditions and farming practices.</li>
+                <li>Create a supportive community for farmers to connect and share knowledge.</li>
+            </ul>
+        </section>
+
+        <section class="section founder hidden">
+            <h2>Our Founders</h2>
+
+            <div class="founders">
+                <div class="founder-info">
+                    <h3>ALI HUNAIN</h3>
+                    <h4>Roll number: 21k-3397</h4>
+                    <p>A computer science student with extensive experience in web
+                        development technologies, programming languages, data
+                        structures, algorithms, database administration, and speed
+                        programming. Through coursework, projects, and speed
+                        programming contests, they have developed theoretical
+                        understanding and practical skills necessary for success in the field. </p>
+                </div>
+
+                <div class="founder-info">
+                    <h3>USMAN NISAR</h3>
+                    <h4>Roll number: 21k-3221</h4>
+                    <p>A computer science student with extensive experience in web
+                        development technologies, programming languages, data
+                        structures, algorithms, database administration, and speed
+                        programming.</p>
+                </div>
+
+                <div class="founder-info">
+                    <h3>ASHAR UR RAHMAN</h3>
+                    <h4>Roll number: 20k-1667</h4>
+                    <p>A computer science student with extensive experience in web
+                        development technologies, programming languages, data
+                        structures, algorithms, database administration, and speed
+                        programming. </p>
+                </div>
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <script type="importmap">
+        {
+          "imports": {
+            "@google/generative-ai": "https://esm.run/@google/generative-ai"
+          }
+        }
+    </script>
+
+    <script type="module">
+        import { GoogleGenerativeAI } from "@google/generative-ai";
+        const genAI = new GoogleGenerativeAI('AIzaSyBlbgVMq6W849PT9WAnHZZghMKtIq8RtAY');
+
+        const chatInput = document.querySelector(".chat-input textarea");
+        const sendChatBtn = document.querySelector(".chat-input span");
+        const chatbox = document.querySelector(".chatbox");
+        const chatbotToggler = document.querySelector(".chatbot-toggler");
+        const chatbotCloseBtn = document.querySelector(".close-btn");
+
+
+
+
+        let userMessage;
+        const inputInitHeight = chatInput.scrollHeight;
+
+        async function runModel(prompt) {
+
+            const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+
+            const result = await model.generateContent(prompt);
+            const response = await result.response;
+            const text = await response.text();
+            return text;
+        }
+
+        const createChatLi = (message, className) => {
+            const chatLi = document.createElement("li");
+            chatLi.classList.add("chat", className);
+            let chatContent = className === "outgoing" ? `<p></p>` : `<span class="material-symbols-outlined">smart_toy</span><p></p>`;
+            chatLi.innerHTML = chatContent;
+            chatLi.querySelector("p").textContent = message;
+            return chatLi;
+        }
+
+        const generateResponse = async (chatElement, userMessage) => {
+            const messageElement = chatElement.querySelector("p");
+            try {
+                const answer = await runModel(userMessage);
+                messageElement.textContent = answer;
+            } catch (error) {
+                console.error("Failed to generate response:", error);
+                messageElement.textContent = "Sorry, something went wrong.";
+            }
+            chatbox.scrollTo(0, chatbox.scrollHeight);
+        }
+
+        const handleChat = () => {
+            userMessage = chatInput.value.trim();
+            if (!userMessage) return;
+            chatInput.value = "";
+            chatInput.style.height = `${inputInitHeight}px`;
+
+            chatbox.appendChild(createChatLi(userMessage, "outgoing"));
+            chatbox.scrollTo(0, chatbox.scrollHeight);
+
+            setTimeout(() => {
+                const incomingChatLi = createChatLi("Thinking...", "incoming")
+                chatbox.appendChild(incomingChatLi);
+                chatbox.scrollTo(0, chatbox.scrollHeight);
+                generateResponse(incomingChatLi, userMessage);
+            }, 600)
+        }
+
+        chatInput.addEventListener("input", () => {
+
+            chatInput.style.height = `${inputInitHeight}px`;
+            chatInput.style.height = `${chatInput.scrollHeight}px`;
+        });
+
+        chatInput.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") {
+                if (e.shiftKey) {
+                    chatInput.value += "\n";
+                    e.preventDefault();
+                } else {
+                    e.preventDefault();
+                    handleChat();
+                }
+            }
+        });
+
+
+        sendChatBtn.addEventListener("click", handleChat);
+        chatbotCloseBtn.addEventListener("click", () => document.body.classList.remove("show-chatbot"));
+        chatbotToggler.addEventListener("click", () => document.body.classList.toggle("show-chatbot"));
+        document.getElementById('submit').addEventListener('click', function () {
+            alert('Are you sure you want to log out?');
+            window.location.href = "index.html"; // Redirect to login page after confirmation
+        });
+        document.getElementById("img").addEventListener("click", function () {
+            window.location.href = "imageclass.html";
+        });
+
+
+    </script>
+
+
+
+    <button class="chatbot-toggler">
+        <span class="material-symbols-outlined">mode_comment</span>
+        <span class="material-symbols-outlined">close</span>
+    </button>
+    <div class="chatbot">
+        <header>
+            <h2>FieldGenie</h2>
+            <span class="close-btn material-symbols-outlined">close</span>
+        </header>
+        <ul class="chatbox">
+            <li class="chat incoming">
+                <span class="material-symbols-outlined">smart_toy</span>
+                <p>Hi there 👋<br>How can I help you today?</p>
+            </li>
+        </ul>
+        <div class="chat-input">
+            <textarea placeholder="Enter a message..." spellcheck="false" required></textarea>
+            <span id="send-btn" class="material-symbols-outlined">send</span>
+        </div>
+    </div>
+
+    <button id="submit" type="submit" class="btni">LOGOUT</button>
+    <!-- <button id="image-class" type="submit" class="image-class" >IMG_C</button> -->
+    <button class="image-class">
+        <a href="#" id="img"><i class='bx bx-image-alt'></i></a>
+    </button>
+
+</body>
+
+</html>

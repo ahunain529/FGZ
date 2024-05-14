@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UFT-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <title>FieldGenie</title>
+        <link rel="stylesheet" href="style2.css">
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        <script type="module" src="register.js" defer></script>
+        <script type="module" src="login.js" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    </head>
+
+    <body>
+        
+        <header class="header">
+            <a href="#" class="logo">FieldGenie.</a>
+            <div class="social-media">
+                <a href="#" id="ali-fb"><i class='bx bxl-facebook'></i></a>
+                <a href="#" id="ali-ins"><i class='bx bxl-instagram-alt'></i></a>
+                <a href="#" id="ali-lin"><i class='bx bxl-linkedin'></i></a>
+                <a href="#" id="ali-git"><i class='bx bxl-github'></i></a>
+            </div>
+        </header>
+
+        <section class="banner">
+            <div class="slider">
+                <div class="slide">
+                    <img src="china.jpg" alt="">
+                    <div class="left-info">
+                        <div class="penetrate-blur">
+                            <h1>Field</h1>
+                        </div>
+                        <div class="content">
+                            <h3> AI chatbot</h3>
+                            <p>Helping farmers grow with AI.Giving ease to them 
+                                for the work which they do and to provide them with
+                                the best possible outcome which can nourish our farmland
+                                growth.
+                            </p>
+                            <p>FOR QUERIES</p>
+                            <p>Contact : k213397@nu.edu.pk</p>
+                            <a href="#" class="btn" id="lg-bt">Login</a>
+
+                        </div>
+                    </div>
+                    <div class="right-info">
+                        <h1>Genie</h1>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <div class="wrapper">
+            <span class="icon-close"><ion-icon name="close"></ion-icon></span>
+            
+            <div class="form-box login">
+                <h2>Login</h2>
+                <form action="#">
+                    <div class="input-box">
+                        <span class="icon"><ion-icon name="mail"></ion-icon></span>
+                        <input type="email" id="email1" required >
+                        <label >Email</label>
+                    </div>
+                    <div class="input-box">
+                        <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+                        <input type="password" id="password1" required>
+                        <label>Password</label>
+                    
+                    </div>
+                    <div class="remember-forget">
+                        <a href="#" id="fg_pass">Forgot password?</a>
+                        <a href="#" id="show_pass">Show password</a>
+                    </div>
+                    <button id="submit1" type="submit" class="btni"  >Login</button>
+                    <div class="login-register">
+                        <p>Don't have an account? <a href="#" 
+                            class="register-link">Register</a></p>
+                    </div>
+                </form>
+            </div>
+
+            <div class="form-box register">
+                <h2>Registration</h2>
+                <form action="#">
+
+                    <div class="input-box">
+                        <span class="icon"><ion-icon name="person"></ion-icon></span>
+                        <input type="text" id="username" required>
+                        <label >Username</label>
+                    </div>
+
+                    <div class="input-box">
+                        <span class="icon"><ion-icon name="mail"></ion-icon></span>
+                        <input type="email" id="email" required>
+                        <label >Email</label>
+                    </div>
+                    <div class="input-box">
+                        <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+                        <input type="password" id="password" required>
+                        <label>Password</label>
+                    </div>
+
+                    <div class="remember-forget">
+                        <label><input type="checkbox">I agree to the terms & condition</label>
+                        <a href="#" id="show_pass1">Show password</a>
+                        
+
+                    </div>
+
+                    
+                    
+                    <button id="submit" type="submit" class="btni" >Register</button>
+                   
+                    <div class="login-register">
+                        <p>Already have an account? <a href="#" 
+                            class="Login-link">Login</a></p>
+                    </div>
+                </form>
+            </div>
+
+            
+
+        </div>
+        
+
+        
+
+        
+    </body>
+    <script src="script2.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    
+    
+
+</html>
